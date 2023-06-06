@@ -26,9 +26,9 @@ main() {
   heading "Commit list"
   echo "$COMMIT_LIST"
 
-  FIXUP_COUNT=`echo "$COMMIT_LIST" | grep fixup! | wc -l || true`
-  FUTURE_COUNT=`echo "$COMMIT_LIST" | grep future! | wc -l || true`
-  SQUASH_COUNT=`echo "$COMMIT_LIST" | grep squash! | wc -l || true`
+  FIXUP_COUNT=`echo "$COMMIT_LIST" | grep '^fixup!' | wc -l || true`
+  FUTURE_COUNT=`echo "$COMMIT_LIST" | grep '^future!' | wc -l || true`
+  SQUASH_COUNT=`echo "$COMMIT_LIST" | grep '^squash!' | wc -l || true`
   MERGE_COUNT=`echo "$COMMIT_LIST" | grep -E ' <- ([^ ]+ ){2,}$' | wc -l || true`
   
   heading "Results"
