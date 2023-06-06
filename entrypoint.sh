@@ -26,18 +26,26 @@ main() {
   heading "Commit list"
   echo "$COMMIT_LIST"
 
-  FIXUP_COUNT=`echo "$COMMIT_LIST" | grep fixup! | wc -l || true`
-  SQUASH_COUNT=`echo "$COMMIT_LIST" | grep squash! | wc -l || true`
+  FIXUP_COUNT=`echo "$COMMIT_LIST" | grep '^fixup!' | wc -l || true`
+  FUTURE_COUNT=`echo "$COMMIT_LIST" | grep '^future!' | wc -l || true`
+  SQUASH_COUNT=`echo "$COMMIT_LIST" | grep '^squash!' | wc -l || true`
   MERGE_COUNT=`echo "$COMMIT_LIST" | grep -E ' <- ([^ ]+ ){2,}$' | wc -l || true`
   
   heading "Results"
   echo "Fixup! commits: $FIXUP_COUNT"
+  echo "Future! commits: $FUTURE_COUNT"
   echo "Squash! commits: $SQUASH_COUNT"
   echo "Merge commits: $MERGE_COUNT"
   
   if [[ "$FIXUP_COUNT" -gt "0" ]]; then
     heading "Bad commits"
     /usr/bin/git log --pretty=format:%s __ci_base..__ci_pr | grep fixup!
+    exit 1
+  fi
+
+  if [[ "$FUTURE_COUNT" -gt "0" ]]; then
+    heading "Bad commits"
+    /usr/bin/git log --pretty=format:%s __ci_base..__ci_pr | grep future!
     exit 1
   fi
 
