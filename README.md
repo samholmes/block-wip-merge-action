@@ -32,7 +32,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.0.0
     - name: Block Fixup Commit Merge
-      uses: samholmes/block-wip-pr-action@v1.1.1
+      uses: samholmes/block-wip-pr-action@v1.2.0
 ```
 
 Optionally, setup Branch Protection to block merging of PRs against the `master`

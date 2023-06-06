@@ -9,4 +9,5 @@ jobs:
     steps:
     - uses: actions/checkout@2.0.0
     - name: Block WIP PR
-      uses: samholmes/block-wip-pr-action@1.1.1
+      uses: samholmes/block-wip-pr-action@1.2.0
+
